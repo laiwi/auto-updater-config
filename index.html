@@ -1,5 +1,13 @@
 <script type="text/javascript" charset="utf-8">
     (function() {
+        let refreshing = false
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (refreshing) {
+            return
+          }
+          refreshing = true;
+          window.location.reload();
+        });
     if('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./index.js');
     }
